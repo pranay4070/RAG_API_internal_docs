@@ -4,7 +4,7 @@ A fully functional **RAG (Retrieval-Augmented Generation)** API that answers per
 
 ---
 
-## What You'll Learn
+## Context
 
 - **Perform RAG** – Retrieval-Augmented Generation both manually and with code.
 - **Build a personal knowledge base** – Using ChromaDB and vector embeddings.
