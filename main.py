@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from pydantic import BaseModel  # Pydantic validates incoming request data
 import ollama
 import chromadb
 from chromadb.utils.embedding_functions.ollama_embedding_function import (
@@ -22,19 +23,25 @@ collection = client.get_or_create_collection(
 
 
 
-@app.get("/ask")  # This creates a GET endpoint at /ask
-def ask(question: str):  # FastAPI automatically reads "question" from the URL query string
+@app.get("/ask")
+def ask(question: str, user: str = None):  # user is optional, None means search all profiles
+    # Build the query parameters
+    query_params = {
+        "query_texts": [question],
+        "n_results": 2,
+    }
+
+    # If a user name was provided, only search that user's chunks
+    if user:
+        query_params["where"] = {"user_name": user}  # ChromaDB metadata filter
+
     # Step 1: RETRIEVE - search ChromaDB for the most relevant chunks
-    results = collection.query(
-        query_texts=[question],  # ChromaDB converts this to a vector and finds similar chunks
-        n_results=5,  # Retrieve more chunks so identity questions (e.g. "What is my name") get the right context
-    )
-    # Combine the matching chunks into a single string (filter out None if any)
-    docs = results["documents"][0] or []
-    context = "\n\n".join(d for d in docs if d)
+    results = collection.query(**query_params)  # ** unpacks the dictionary as keyword arguments
+    context = "\n\n".join(results["documents"][0])
 
     # Step 2: AUGMENT - build a prompt that includes the retrieved context
-    augmented_prompt = f"""The context below describes one specific person's profile. Answer the question about THAT person only. Do not describe yourself (the AI assistant); always describe the person in the context. If the context does not contain relevant information, say so.
+    augmented_prompt = f"""Use the following context to answer the question.
+If the context doesn't contain relevant information, say so.
 
 Context:
 {context}
@@ -47,9 +54,38 @@ Question: {question}"""
         messages=[{"role": "user", "content": augmented_prompt}],
     )
 
-    # Return the answer along with the context so users can verify the source
+    # Return the answer along with metadata about the query
     return {
         "question": question,
         "answer": response["message"]["content"],
         "context_used": results["documents"][0],
+        "filtered_by_user": user,  # Shows which user was filtered (or None for all)
+    }
+
+
+# Define the expected shape of incoming data for the POST endpoint
+class DocumentSubmission(BaseModel):
+    user_name: str  # Who this profile belongs to
+    content: str  # The profile text to store
+
+
+@app.post("/documents")  # POST endpoint - accepts data in the request body
+def add_document(submission: DocumentSubmission):
+    # Split the submitted profile into chunks by paragraph
+    chunks = [chunk.strip() for chunk in submission.content.split("\n\n") if chunk.strip()]
+
+    # Store each chunk in ChromaDB with the user's name attached as metadata
+    collection.add(
+        ids=[f"{submission.user_name}-chunk{i}" for i in range(len(chunks))],
+        documents=chunks,
+        metadatas=[
+            {"source": "profile", "user_name": submission.user_name, "chunk_index": i}
+            for i in range(len(chunks))  # user_name metadata lets us filter by user later
+        ],
+    )
+
+    return {
+        "message": f"Added {len(chunks)} chunks for user '{submission.user_name}'.",
+        "user_name": submission.user_name,
+        "chunks_added": len(chunks),
     }
