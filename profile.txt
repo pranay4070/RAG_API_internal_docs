@@ -1,0 +1,54 @@
+ABOUT
+Name: Pranay Bhasker Reddy. I am a B.Tech student at Indian Institute of Technology, Tirupati (2021-2025).
+Contact: +91-7416751855 | pranaybhasker2004@gmail.com | Roll No: CS21B024
+Social: Github | Leetcode | Linkedin
+
+
+EDUCATION
+B.Tech, Indian Institute of Technology Tirupati. CGPA: 7.76. 2021-2025.
+
+Senior Secondary, Telangana State Board of Intermediate Education. 98.2%. 2021.
+
+Secondary, Board of Secondary Education Telangana. 97%. 2019.
+
+
+EXPERIENCE
+Riverbed Technology | Aug 2025 – Present | MTS Intern
+
+Contributed to building a SaaS web platform for cross-region cloud data transfer, supporting the product lifecycle from beta release to general availability (GA) production. Owned an end-to-end backend module by creating and executing an epic. Developed backend services using FastAPI, implementing RESTful APIs secured with JWT-based authentication. Implemented core backend features including OCI SMTP mail service integration, UI audit logging, beta rsyslog backend logging, database schema and model design. Included bucket validation for OCI Object Storage and S3 access types, multi-tenant management features with configurable limits for users and tenants. Tools: Python, FastAPI, PostgreSQL, Alembic, Docker, Git, Bitbucket, Jira, Confluence, Cursor, OCI Cloud.
+
+
+PROJECTS
+IITHUB – Full Stack Web Application. Guide: Dr. Sridhar, IIT Tirupati.
+
+A platform that enables students across IITs to collaborate for Inter-IIT technical and cultural competitions. Features: Interest groups, Academic doubts section, Real-time personal and group chats, email notifications on replies, Announcements, JWT-based sessions. Technologies: MongoDB, Express.js, Node.js, React, Bootstrap, Socket.IO, JWT.
+
+
+RideShare – Android Application. Guide: Dr. Sridhar, IIT Tirupati.
+
+An app that allows users to share travel plans and find compatible co-travelers along similar routes. Considers possible routes between two locations, calculates feasible travel overlap, and connects users accordingly. Technologies: Google Maps API, Firebase, Java.
+
+
+ATM Management System – OOPS Project. Guide: Dr. Sridhar, IIT Tirupati.
+
+Designed and developed an ATM system using object-oriented design principles. Applied encapsulation, abstraction, inheritance, and polymorphism in Java. Implemented authentication, balance inquiry, withdrawals, and deposits.
+
+
+TECHNICAL SKILLS
+Programming Languages: C++, Java, SQL. Web Development: FastAPI, ReactJS, MERN Stack, JavaScript, HTML, CSS. Tools/Frameworks: Git, Docker, Cursor, Android Studio, LaTeX, ChatGPT. Operating Systems: Windows, Linux, macOS.
+
+
+KEY COURSES
+DSA, DBMS, Computer Networks, Operating Systems, Software Engineering.
+
+
+POSITIONS OF RESPONSIBILITY
+Excelsior Club Head, Higher Education Club, IIT Tirupati. June 2024 – April 2025.
+
+Mess Council, Core Member, IIT Tirupati. Sept 2023 – April 2024.
+
+
+ACHIEVEMENTS
+All India Rank 3296 in JEE Advanced 2021. 99.63 Percentile in JEE Mains 2021.
+
+Runner-up, Intra-IIT Table Tennis (Spartans) Tournament 2024-25. Captain, Bhairav Table Tennis Team, Intra IIT Tournament 2022-23.
