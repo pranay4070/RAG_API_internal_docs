@@ -1,4 +1,4 @@
-# RAG FastAPI – Local Personal Q&A API
+# RAG FastAPI – Local API
 
 A fully functional **RAG (Retrieval-Augmented Generation)** API that answers personal questions using AI, running entirely on your local machine. It uses ChromaDB for a vector knowledge base, Ollama for embeddings and the LLM, and FastAPI for the REST API.
 
